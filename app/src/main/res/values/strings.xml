@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Movie Hall</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail">activity_detail</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preferences strings -->
+    <string name="pref_sort_order_label">Sort Order</string>
+    <string name="pref_sort_order_label_popular">Most popular</string>
+    <string name="pref_sort_order_label_highest_rated">Highest rated</string>
+    <string name="pref_sort_order_key" translatable="false">order</string>
+    <string name="pref_sort_order_popular" translatable="false">popularity.desc</string>
+    <string name="pref_sort_order_highest_rated" translatable="false">vote_count.desc</string>
+</resources>

@@ -3,12 +3,9 @@ package com.ensardz.moviehall.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.media.MediaRecorder;
 
 import com.ensardz.moviehall.data.MoviesContract.VideosEntry;
 import com.ensardz.moviehall.data.MoviesContract.MoviesEntry;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by Quique on 01/02/2017.
@@ -25,26 +22,26 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_VIDEOS_TABLE = "CREATE TABLE " + VideosEntry.TABLE_NAME + " (" +
+        final String SQL_CREATE_VIDEOS_TABLE = "CREATE TABLE " + VideosEntry.TABLE_VIDEOS + " (" +
                 VideosEntry._ID + " INTEGER PRIMARY KEY, " +
-                VideosEntry.COLUMN_NAME_KEY + " TEXT NOT NULL, " +
+                VideosEntry.COLUMN_MOVIE_ID + " INTEGER NOT NULL" +
+                VideosEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 VideosEntry.COLUMN_YOUTUBE_KEY + " TEXT NOT NULL " +
                 ");";
 
-        final String SQL_CREATE_MOVIES_TABLE = "CREATE TABLE " + MoviesEntry.TABLE_NAME + " (" +
+        final String SQL_CREATE_MOVIES_TABLE = "CREATE TABLE " + MoviesEntry.TABLE_MOVIES + " (" +
                 MoviesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                MoviesEntry.COLUMN_NAME_VIDEO_KEY + "INTEGER NOT NULL, " +
-                MoviesEntry.COLUMN_NAME_MOVIE_ID + "INTEGER NOT NULL, " +
-                MoviesEntry.COLUMN_NAME_TITLE + " TEXT NOT NULL, " +
-                MoviesEntry.COLUMN_NAME_POSTER + " TEXT NULL, " +
-                MoviesEntry.COLUMN_NAME_OVERVIEW + " TEXT NULL, " +
-                MoviesEntry.COLUMN_NAME_VOTE_AVERAGE + " REAL NULL, " +
-                MoviesEntry.COLUMN_NAME_RELEASE_DATE + " TEXT NULL, " +
-                MoviesEntry.COLUMN_NAME_RUNTIME + " INTEGER NULL, " +
-                MoviesEntry.COLUMN_NAME_IS_FAVOURITE + " INTEGER DEFAULT 0" +
+                MoviesEntry.COLUMN_MOVIE_ID + "INTEGER NOT NULL, " +
+                MoviesEntry.COLUMN_TITLE + " TEXT NOT NULL, " +
+                MoviesEntry.COLUMN_POSTER + " TEXT NULL, " +
+                MoviesEntry.COLUMN_OVERVIEW + " TEXT NULL, " +
+                MoviesEntry.COLUMN_VOTE_AVERAGE + " REAL NULL, " +
+                MoviesEntry.COLUMN_RELEASE_DATE + " TEXT NULL, " +
+                MoviesEntry.COLUMN_RUNTIME + " INTEGER NULL, " +
+                MoviesEntry.COLUMN_IS_FAVOURITE + " INTEGER DEFAULT 0" +
                 ");";
-        db.execSQL(SQL_CREATE_VIDEOS_TABLE);
         db.execSQL(SQL_CREATE_MOVIES_TABLE);
+        db.execSQL(SQL_CREATE_VIDEOS_TABLE);
     }
 
     @Override

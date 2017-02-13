@@ -15,6 +15,9 @@ public class MoviesContract {
     public static final String CONTENT_AUTHORITY = "com.ensardz.android.moviehall.provider";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
+    public static final String PATH_MOVIE = "movies";
+    public static final String PATH_VIDEO = "videos";
+
     public static class VideosEntry implements BaseColumns{
         //Table name
         public static final String TABLE_VIDEOS = "videos";

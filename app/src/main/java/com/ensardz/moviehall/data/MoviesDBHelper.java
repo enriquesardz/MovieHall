@@ -22,12 +22,6 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_VIDEOS_TABLE = "CREATE TABLE " + VideosEntry.TABLE_VIDEOS + " (" +
-                VideosEntry._ID + " INTEGER PRIMARY KEY, " +
-                VideosEntry.COLUMN_MOVIE_ID + " INTEGER NOT NULL" +
-                VideosEntry.COLUMN_NAME + " TEXT NOT NULL, " +
-                VideosEntry.COLUMN_YOUTUBE_KEY + " TEXT NOT NULL " +
-                ");";
 
         final String SQL_CREATE_MOVIES_TABLE = "CREATE TABLE " + MoviesEntry.TABLE_MOVIES + " (" +
                 MoviesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -40,6 +34,14 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
                 MoviesEntry.COLUMN_RUNTIME + " INTEGER NULL, " +
                 MoviesEntry.COLUMN_IS_FAVOURITE + " INTEGER DEFAULT 0" +
                 ");";
+
+        final String SQL_CREATE_VIDEOS_TABLE = "CREATE TABLE " + VideosEntry.TABLE_VIDEOS + " (" +
+                VideosEntry._ID + " INTEGER PRIMARY KEY, " +
+                VideosEntry.COLUMN_MOVIE_ID + " INTEGER NOT NULL" +
+                VideosEntry.COLUMN_NAME + " TEXT NOT NULL, " +
+                VideosEntry.COLUMN_YOUTUBE_KEY + " TEXT NOT NULL " +
+                ");";
+
         db.execSQL(SQL_CREATE_MOVIES_TABLE);
         db.execSQL(SQL_CREATE_VIDEOS_TABLE);
     }

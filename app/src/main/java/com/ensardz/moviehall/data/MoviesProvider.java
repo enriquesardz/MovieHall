@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -21,12 +22,29 @@ public class MoviesProvider extends ContentProvider {
     private static final int VIDEOS = 3;
     private static final int VIDEOS_WITH_MOVIE_ID = 4;
 
+    private static final SQLiteQueryBuilder sMovieWithVideoQueryBuilder;
+
+    static{
+        sMovieWithVideoQueryBuilder = new SQLiteQueryBuilder();
+
+        //INNER JOIN
+        //movies INNER JOIN videos ON movies.movie_id = videos.movie_id
+        sMovieWithVideoQueryBuilder.setTables(
+                MoviesContract.MoviesEntry.TABLE_MOVIES + " INNER JOIN " +
+                        MoviesContract.VideosEntry.TABLE_VIDEOS +
+                        " ON " + MoviesContract.MoviesEntry.TABLE_MOVIES +
+                        "." + MoviesContract.MoviesEntry.COLUMN_MOVIE_ID +
+                        " = " + MoviesContract.VideosEntry.COLUMN_MOVIE_ID
+
+        );
+    }
+
     private static UriMatcher buildUriMatcher(){
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = MoviesContract.CONTENT_AUTHORITY;
 
-        matcher.addURI(authority, MoviesContract.PATH_MOVIE, MOVIES);
-        matcher.addURI(authority, MoviesContract.PATH_VIDEO, VIDEOS);
+        matcher.addURI(authority, MoviesContract.PATH_MOVIES, MOVIES);
+        matcher.addURI(authority, MoviesContract.PATH_VIDEOS, VIDEOS);
 
         return matcher;
     }

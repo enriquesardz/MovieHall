@@ -16,20 +16,21 @@ public class MoviesProvider extends ContentProvider {
 
     private static final String LOG_TAG = MoviesProvider.class.getSimpleName();
     private static final UriMatcher mUriMatcher = buildUriMatcher();
+    private MoviesDBHelper mDBHelper;
 
-    private static final int MOVIES = 1;
-    private static final int MOVIE_WITH_ID = 2;
-    private static final int VIDEOS = 3;
-    private static final int VIDEOS_WITH_MOVIE_ID = 4;
+    private static final int MOVIES = 100;
+    private static final int MOVIE_WITH_ID = 101;
+    private static final int VIDEOS = 200;
+    private static final int VIDEOS_WITH_MOVIE_ID = 201;
 
-    private static final SQLiteQueryBuilder sMovieWithVideoQueryBuilder;
+    private static final SQLiteQueryBuilder sMovieWithVideosQueryBuilder;
 
     static{
-        sMovieWithVideoQueryBuilder = new SQLiteQueryBuilder();
+        sMovieWithVideosQueryBuilder = new SQLiteQueryBuilder();
 
         //INNER JOIN
         //movies INNER JOIN videos ON movies.movie_id = videos.movie_id
-        sMovieWithVideoQueryBuilder.setTables(
+        sMovieWithVideosQueryBuilder.setTables(
                 MoviesContract.MoviesEntry.TABLE_MOVIES + " INNER JOIN " +
                         MoviesContract.VideosEntry.TABLE_VIDEOS +
                         " ON " + MoviesContract.MoviesEntry.TABLE_MOVIES +
@@ -44,8 +45,9 @@ public class MoviesProvider extends ContentProvider {
         final String authority = MoviesContract.CONTENT_AUTHORITY;
 
         matcher.addURI(authority, MoviesContract.PATH_MOVIES, MOVIES);
+        matcher.addURI(authority, MoviesContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
         matcher.addURI(authority, MoviesContract.PATH_VIDEOS, VIDEOS);
-
+        matcher.addURI(authority, MoviesContract.PATH_VIDEOS + "/#", VIDEOS_WITH_MOVIE_ID);
         return matcher;
     }
 

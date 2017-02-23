@@ -54,7 +54,9 @@ public class MoviesProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        return false;
+
+        mDBHelper = new MoviesDBHelper(getContext());
+        return true;
     }
 
     @Nullable
